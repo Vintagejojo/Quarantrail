@@ -1,0 +1,112 @@
+//     // SCENE 1
+//     {
+//         id: 'scene1',
+//         text: 'You just woke up in this bitch', //This is the text that displays on the screen
+//         options: [
+//                     {
+//                         text: 'Jack off',  //Options to move on. Option 1
+//                         setItem: { crystallizedGoo: true}, //This adds the item to your inventory. Inventory is not represented to the player yet.
+//                         nextScene: 'scene2',
+//                         healthPoints: 100
+//                     },
+//                     {
+//                         text: 'Dont Jack off', //Option 2
+//                         nextScene: 'scene2'
+//                     }
+//                 ]
+//     },
+// // SCENE 2
+//     {
+//         id: 'scene2',
+//         text: 'Regardless of your choice, it is time to start your day. You leave the house and encounter a fellow who will trade you a nice blade or gun for crystallized jizz',
+//         options: [
+//                     {
+//                         text: 'Make the trade for the blade',  
+//                         requiredItem: (currentItem) => currentItem.crystallizedGoo,
+//                         setItem: {crystallizedGoo: false, redblade: true},
+//                         nextScene: 'scene3',
+                         
+//                     },
+//                     {
+//                         text: 'Make the trade for the gun',  
+//                         requiredItem: (currentItem) => currentItem.crystallizedGoo,
+//                         setItem: {crystallizedGoo: false, gun: true},
+//                         nextScene: 'scene3',
+                         
+//                     },
+//                     // What is below is important for structure.
+//                     {
+//                         text: 'Ignore the merchant',  
+//                         nextScene: 'scene3',
+                        
+//                     }, 
+
+//                 ]
+
+//     },
+//     // END OF GAME SCENE
+//     {
+//         id: 'gameoverScene',
+//         text: 'What a horrible night to have a curse....', //This is the text that displays on the screen
+//         options: [
+//                     {
+//                         text: 'Start Over'
+//                     },
+
+//                 ]
+//     },
+
+//     {
+//         id: 'scene3',
+//         text: 'You have found a strange monolith. What do you do with it? ', //This is the text that displays on the screen
+//         options: [
+//                     {
+//                         text: 'touch monolith',
+//                         nextScene: '?????????',
+//                         status: 'dead'
+//                     },
+//                     {
+//                         text: 'Become one with the void',
+//                         nextScene: 'gameoverScene'
+//                     },
+
+//                 ]
+//     },
+    
+// ]
+
+
+//
+  {
+    id: "",
+    text: "",
+    url: "",
+    options: [
+        {
+            text: "",
+            nextScene: "",
+            requiredItem: (currentItem) => currentItem.crystallizedGoo,
+                            //code below removes item required and replaces it with what you get
+        },
+
+        {
+          text: "",
+          nextScene: "",
+        }
+    ],
+  },
+
+
+\"Hey boss how's it going......? What!? Oh my gosh i think I have my days mixed up, do you need me to come in?\"
+
+
+sceneOnePic = document.createElement('img')
+sceneTwoPic = document.createElement('img')
+sceneThreePic = document.createElement('img')
+sceneFourPic = document.createElement('img')
+sceneFivePic = document.createElement('img')
+sceneSixPic = document.createElement('img')
+sceneSevenPic = document.createElement('img')
+sceneEightPic = document.createElement('img')
+sceneNinePic = document.createElement('img')
+sceneTenPic = document.createElement('img')
