@@ -14,8 +14,8 @@ body {
     /* background-color: rgb(51, 141, 177); */
     background-color: #178b5170;
     /* keyframes color change below */
-     animation:bgChange 6s 6s alternate infinite;
-    transition: all 6s ease;
+     animation:bgChange 3s 3s alternate infinite;
+    transition: all 3s ease;
 }
 
 @keyframes bgChange {

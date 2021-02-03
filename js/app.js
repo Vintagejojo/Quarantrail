@@ -248,7 +248,7 @@ const textScenes = [
     options: [
       {
         text: "Grab the backpack",
-        nextScene: "adventurestar",
+        nextScene: "adventurestarts",
       },
       {
         text: "Ignore the backpack and set out on you quest for answers",
