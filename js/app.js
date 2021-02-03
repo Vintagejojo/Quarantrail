@@ -49,18 +49,13 @@ function gameStart() {
     JSON.parse(localStorage.getItem(saveData.lastScene)) || "scene1";
   showTextScene(startingPoint);
   playerHealth.value = 100;
-  endings()
+  playerSanity.value = 100;
   // showSceneSlide()
 }
 
-// potential canvas functionality below
 
-// const canvas = document.querySelector('canvas');
-// const ctx = canvas.getContext('2d');
-// ctx.fillStyle = 'green';
-// ctx.fillRect(50, 50, 300, 300);
 
-// End of Canvas example
+
 
 //Function below displays the text scene in the scene container represented in HTML
 function showTextScene(textNodeIndex) {
@@ -71,6 +66,8 @@ function showTextScene(textNodeIndex) {
   textElement.innerText = textScene.text;
   showSceneSlide(textScene);
   // REMOVES HTML DOM OPTION BUTTONS
+  
+    
   while (optionButtonElement.firstChild) {
     optionButtonElement.removeChild(optionButtonElement.firstChild);
   }
@@ -91,7 +88,7 @@ function showTextScene(textNodeIndex) {
 
 
 //url is the name of the objects property
-//Visual aid code below. Will show images
+//Visual aid code below. Will show images based on the image linked
 //object destructuring below - Will
 function showSceneSlide({ url }) {
   let sceneContainer = document.querySelector(".scene_container");
@@ -106,8 +103,11 @@ function showSceneSlide({ url }) {
 }
 
 
-///
 function showOption(option) {
+  //Code below implements the ability to show a choice if you have the required item
+    //if we have no required state then return true
+    //OR if option.requiredItem returns true
+      //then we show the option
   return option.requiredItem == null || option.requiredItem(inventoryPouch);
 }
 
@@ -116,22 +116,37 @@ function showOption(option) {
 //Code that allows you to select options, and specifiic scenarios
 function selectOption(option) {
   if (option.text == "Start Over") {
-    return gameStart();
+      gameStart();
+      return;
   } else if (option.text == "Become one with the void") {
-    return gameStart();
+       gameStart();
+       return;
   }
+//If else statement that dictates the ending.
+  //If sanity value is fifty or lower, the bad ending plays
+  //if the sanity value is fifty-one or higher, the good ending plays
 
-  else if (option.text == "Lets finish this" && playerSanity.value <= 50) {
-    return showTextScene("Dark_end");
+   if (option.text == "Lets finish this" && playerSanity.value <= 50) {
+     showTextScene("Dark_end");
+     return;
  } else if (option.text == "Lets finish this" && playerSanity.value >= 51) {
-   return showTextScene("Good_end");
+    showTextScene("Good_end");
+    return;
  } else if (option.text == "Conclusion" && playerSanity.value <= 50) {
-    return showTextScene("The_dark");
+    showTextScene("The_dark");
+    return;
  } else if (option.text == "Conclusion" && playerSanity.value >= 51) {
-   return showTextScene("The_truth");
+    showTextScene("The_truth");
+    return;
  }
 
   const nextTextSceneId = option.nextScene;
+  //code below takes the inventoryPouch, add everything in option.setItem to it
+    //then it will override whats in there
+    //for example if pokeball is set to true, but the next scene has it set to false,
+    //pokeball will become false, and you lose it from the 'inventory'
+    //Then it will return a brand new object which will inherit the new set state
+        //once that is finished, it will show the next text scene below
   inventoryPouch = Object.assign(inventoryPouch, option.setItem);
   if (option.healthPoints) {  //if statement allows the options to dictate the health value
     manageHealth(option);
@@ -195,18 +210,35 @@ const textScenes = [
   {
     id: "scene1",
     text:
+      "Hey friends! Welcome to my text based adventure! I'm calling it Quarantrail. It's very very loosley based on Oregon Trail and the text based adventures that I used to play as a kid. You play as a trademark fellow with no memory who wakes up in the woods. Hunt for answers and try to survive. Manage your health and sanity and see if you can make it all the way to the end!",
+    url: "./img/dutch_phone.jpg",
+    //This is the text that displays on the screen
+    options: [
+      {
+        text: "Game Start", //Options to move on. Option 1
+        nextScene: "Opening",
+        healthPoints: 100,
+        sanityPoints: 100,
+      },
+      ],
+  },
+
+  {
+    id: "Opening",
+    text:
       "You wake up with a groggy feeling. It is early in the morning. You are in the woods....How did you get here?",
-    url: "./img/deepforest.jpg",
+    url: "./img/opening_forest.jpg",
     //This is the text that displays on the screen
     options: [
       {
         text: "Get Up", //Options to move on. Option 1
         nextScene: "scene2",
-        healthPoints: -35,
+        healthPoints: 100,
         sanityPoints: 100,
       },
       ],
   },
+
   // SCENE 2
   {
     id: "scene2",
@@ -216,7 +248,7 @@ const textScenes = [
     options: [
       {
         text: "Grab the backpack",
-        nextScene: "adventurestarts",
+        nextScene: "adventurestar",
       },
       {
         text: "Ignore the backpack and set out on you quest for answers",
@@ -233,6 +265,7 @@ const textScenes = [
           {
               text: "Try to sneak by the bear",
               nextScene: "beardeath",
+              sanityPoints: -6,
           },
           {
               text: "Nope on out of there",
@@ -250,6 +283,7 @@ const textScenes = [
         {
             text: "Continue",
             nextScene: "backpackroundtwo",
+            sanityPoints: +2,
         },
 
     ],
@@ -305,7 +339,7 @@ const textScenes = [
   {
     id: "dumb_hero_presses_on",
     text: "Even though you have a thirst for answers, You decide to put your phone away, pick a direction and start hoofing it. Who cares? If you just pick a direction and keep hoofing it. You're bound to find your way. You start trotting in a random direction and after about a dozen paces or so, you trip and hit your head on a rock. A critical hit. Mayyyyyybe you should pull out your phone and try to contact someone.",
-    url: "./img/woods_walk_away.jpg",
+    url: "./img/nope.jpg",
     options: [
         {
             text: "Check Phone...?",
@@ -367,6 +401,7 @@ const textScenes = [
         {
             text: ".....",
             nextScene: "hero_presses_on",
+            sanityPoints: -15,
         },
     ],
   },
@@ -618,7 +653,7 @@ const textScenes = [
 
   {
     id: "the_people",
-    text: "You start walking towards the commotion. You hear voices. You continue to walk for a while until you make it to a clearing. Right past it you see 3 people. 2 guys standing and one who appears to be lying down next to them. They seem to be dressed funny. In all white. Almost as if they are covered in trash bags.",
+    text: "You start walking towards the commotion. You hear voices. You continue to walk for a while until you make it to a clearing. Right past it you see 3 people. 2 guys standing and one who appears to be lying down next to them. They seem to be dressed funny. Are those hazmats....?",
     url: "./img/hazmat_inspection.jpg",
     options: [
         {
@@ -635,7 +670,7 @@ const textScenes = [
   },
 
   {
-    id: "oservation",
+    id: "observation",
     text: "You observe them for a while. The two guys in hazmats are looming over a woman with tattered clothes. Upon closer inspection, she appears to be dead...One of the guys nudges the woman with their foot and rolls her on her back and shines their mounted flashlight in her face for a few seconds...\"Kill confirmed. Still looking for the other target,\" You hear a voice bark into their walkie. The voice sounds familiar. It makes your's skin crawl just hearing it. They start to move away from their position. You want to get a closer look at the woman. Maybe she holds a clue to what's going on here.",
     url: "./img/hazmat_inspection.jpg",
     options: [
@@ -651,12 +686,13 @@ const textScenes = [
   {
     id: "not_so_badCall",
     text: "You prepare to slowly advance towards the clearing where the woman is. You're throat is dry. You could use something to drink....",
-    url: "",
+    url: "./img/dying_of_thirst.jpg",
     options: [
         {
-            text: "Next",
-            nextScene: "not_so_badCall",
+            text: "Press on, thirsty",
+            nextScene: "thirsty_decision",
             sanityPoints: -10,
+            healthPoints: -5,
         },
 
         {
@@ -665,10 +701,33 @@ const textScenes = [
           requiredItem: (currentItem) => currentItem.fullCanteen,
           setItem: {fullCanteen: false, emptyCanteen: true},
           healthPoints: +10,
+          sanityPoints: +5,
 
         }
 
     ],
+  },
+
+  {
+    id: "thirsty_decision",
+    text: "You could really use a drink, but there aren't any water sources nearby. With your throat as dry as the Sahara,you advance forward. You're almost to the womans body when the worst happens: You step on something squeaky. A chew toy...? The squeak echoes throughtout the entire forest it seems like. You freeze in your tracks. This isn't good. The two men turn around and raise their rifles and briskly advance back towards the clearing. \"FREEZE,\" they shout. ",
+    url: "./img/hazmat_introduction.jpg",
+    options: [
+      {
+          text: "Surrender",
+          nextScene: "surrender_scene",
+      },
+
+      {
+        text: "Slowly back away(run).",
+        nextScene: "live_to_fight_anotherday",
+      },
+
+      {
+        text: "Momma didn't raise a coward (fight them)",
+        nextScene: "mortal_kombat"
+      }
+  ],
   },
 
   {
@@ -767,6 +826,7 @@ const textScenes = [
         {
             text: "Next",
             nextScene: "body_search",
+            sanityPoints: -40,
         },
 
     ],
@@ -804,7 +864,7 @@ const textScenes = [
   {
     id: "live_to_fight_anotherday",
     text: "You about face and decide to nope on out of there. The open fire immediately. Bullest whiz by but the dense trees keep you fairly well protected. \"THE SUBJECT IS TRYING TO ESCAPE!!\".....subject? You sense of panic increases two fold. A stray bullet grazes your side and floors you. You feel like it cracked a rib.  ",
-    url: "./img/gunfire_death.jpg",
+    url: "./img/forest_run_away.jpg",
     options: [
         {
             text: "Next",
@@ -844,7 +904,7 @@ const textScenes = [
   {
     id: "rock_path",
     text: "You take a nice sized rock and wind up your throw. You toss a rock as hard as you can at them. You hit one in the shoulder and he turns around and opens fire on you.",
-    url: "/img/rock_throw.jpg",
+    url: "./img/rock_throw.jpg",
     options: [
         {
             text: "Oh sh-",
@@ -857,7 +917,7 @@ const textScenes = [
   {
     id: "bee_path",
     text: "You see a beehive in a nearby tree. This is great! You pull out your slingshot and you lovingly made and wait for your chance. When they are right below it you let it rip. The bee hive falls at their feet and the bees go ballistic. Even though they are wearing suits it still startles them and they run away from the bees. You in the chaos you sneak bee-hind them and put one in a chokehold, holding him hostage. Your craftiness makes you feel like a boss.  \"Ok. now you are going to answer my questions,\" you say.",
-    url: "",
+    url: "./img/beehive.jpg",
     options: [
         {
             text: "Yikes",
@@ -870,7 +930,7 @@ const textScenes = [
   {
     id: "observe_path",
     text: "Your pursuers look everywhere, but for some reason don't think to look up. After what feels like forever, they start walking away from your location. Nows your chance!!!",
-    url: "",
+    url: "./img/stealthbox.jpg",
     options: [
         {
             text: "Sneak behind them",
@@ -967,7 +1027,7 @@ const textScenes = [
   {
     id: "surrender_scene_cont",
     text: ".....and they open fire. It all happens so fast that you don't have much time to react.",
-    url: "",
+    url: "./img/atgunpoint.jpg",
     options: [
         {
             text: "Yikes",
@@ -1006,7 +1066,7 @@ const textScenes = [
   
 //Good ending fight path
 {
-  id: "The_truth ",
+  id: "The_truth",
   text: "Slowly, you start to remember how you got here. In this forest. You remember being captured. You remember escaping. There are still some blurry bits, but one thing is certain. There was some kind of outbreak, and you're being blamed for it. It's going to take some time to regain all of your memories, but you feel as though the key to saving everyone is back at your house in the city. You just have to make it there. Lets put a stop to this....",
   url: "./img/virus.jpg",
   options: [

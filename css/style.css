@@ -12,7 +12,7 @@ body {
     width: 100vw;
     height: 100vh;
     /* background-color: rgb(51, 141, 177); */
-    background-color: #8d6a6a;
+    background-color: #178b5170;
     /* keyframes color change below */
      animation:bgChange 6s 6s alternate infinite;
     transition: all 6s ease;
@@ -21,11 +21,11 @@ body {
 @keyframes bgChange {
     0% {
         /* 361e53 */
-       background:#745757;
+       background:#6e2d2d;
     }
     /* 10741b */
     50% {
-      background:#5e4747;
+      background:#462424;
     }
     
     100% {
@@ -35,7 +35,7 @@ body {
 
 .container {
     position: relative;
-    top: 35%;
+    top: 37%;
     left: 37%;
     bottom: -50%;
     right: 0%; 
@@ -69,10 +69,11 @@ body {
 }
 
 .container, p {
-    color: #dfcccc;
+    color: #e9caca;
     font-family: 'Amatic SC', cursive;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
+    text-shadow: 1px 1px 2px #818197, 0 0 1em rgb(7 12 16 / 86%), 0 0 0.2em blue;
 }
 
 button.btn {
@@ -92,7 +93,7 @@ button.btn {
     border-radius: 5px;
     padding: 5px 10px;
     color: white;
-    outline: none;
+    text-shadow: 1px 1px 2px #818197, 0 0 1em rgb(7 12 16 / 86%), 0 0 0.2em blue;
 }
 
 .scene_container {
@@ -103,15 +104,15 @@ button.btn {
     z-index: 0;
     position: absolute;
     top: 12%;
-    left: 40%;
+    left: 35.5%;
     bottom: 0%;
     right:  0%;
 }
 
 .scene_container, img {
-    width: 400px;
-    height: 320px;
-    box-shadow: 0 0 10px 2px;
+  width: 600px;
+  height: 400px;
+  box-shadow: 0 0 10px 2px burlywood;
 }
 
 /* .sanity_bar {
@@ -141,16 +142,17 @@ button.btn {
 
 
 h1.game_logo {
-    font-size: 40px;
+    font-size: 60px;
     position: relative;
+    display: inline-table;
     /* color: darkkhaki; */
-    margin: 0;
-    top: 1%;
-    left: 44%;
+    /* margin: 0; */
+    top: -3%;
+    left: 41%;
     bottom: 1%;
     right: 1%;
     -webkit-text-stroke: 1px black;
-    color: rgb(189, 107, 155);
+    color:  rgb(211 217 222 / 86%);
    text-shadow:
        3px 3px 0 #000,
      -1px -1px 0 #000,  
@@ -195,7 +197,7 @@ h1.game_logo {
     background: #fff;
     display: block;
     position: relative;
-    top: 26%;
+    top: 28%;
     left: 85%;
     width: 250px;
     height: 20px;
