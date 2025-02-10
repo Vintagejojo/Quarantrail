@@ -1,0 +1,57 @@
+{
+  "1": {
+    "text": "Your adventure begins in a mystical forest...",
+    "options": [
+      { "id": "2", "choice": "Explore the cave", "health": -10, "sanity": -5 },
+      { "id": "3", "choice": "Follow the river", "health": 0, "sanity": 5 }
+    ]
+  },
+  "2": {
+    "text": "This cave is bussin, frfr no cap.",
+    "options": [
+      { "id": "1", "choice": "Go back!", "health": 0, "sanity": 0 },
+      {
+        "id": "3",
+        "choice": "The cave is NOT bussin",
+        "health": -5,
+        "sanity": -10
+      },
+      { "id": "4", "choice": "Lil B", "health": 5, "sanity": 10 },
+      { "id": "5", "choice": "BasedGod", "health": 10, "sanity": 20 }
+    ]
+  },
+  "3": {
+    "text": "I don't feel so good........",
+    "options": [
+      { "id": "1", "choice": "Go back!", "health": 0, "sanity": 0 },
+      {
+        "id": "3",
+        "choice": "The cave is NOT bussin",
+        "health": -5,
+        "sanity": -10
+      },
+      { "id": "4", "choice": "Lil B", "health": 5, "sanity": 10 },
+      { "id": "5", "choice": "BasedGod", "health": -100, "sanity": 20 }
+    ]
+  },
+  "4": {
+    "text": "I don't feel so good........",
+    "options": [
+      { "id": "1", "choice": "Go back!", "health": 0, "sanity": 0 },
+      {
+        "id": "3",
+        "choice": "The cave is NOT bussin",
+        "health": -5,
+        "sanity": -10
+      },
+      { "id": "4", "choice": "Lil B", "health": 5, "sanity": 10 },
+      { "id": "5", "choice": "BasedGod", "health": -100, "sanity": 20 }
+    ]
+  },
+  "5": {
+    "text": "you are dead........",
+    "options": [
+      { "id": "1", "choice": "Start Over!", "health": 0, "sanity": 0 }
+    ]
+  }
+}
